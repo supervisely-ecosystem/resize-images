@@ -11,18 +11,17 @@ team_id      = int(os.environ['context.teamId'])            # from debug.env
 workspace_id = int(os.environ['context.workspaceId'])       # from debug.env
 project_id   = int(os.environ['modal.state.slyProjectId'])  # from debug.env
 task_id      = int(os.environ["TASK_ID"])                   # from debug.env
+new_project_name = os.environ["modal.state.projectName"]    # from debug.env
 # ----------------------------------------------------------------------------------------------------------------------
 # -------------- init global variables ---------------------------------------------------------------------------------
-global NEW_PROJECT_NAME, TARGET_HEIGHT, TARGET_WIDTH
-NEW_PROJECT_NAME = None                                      # is it necessary ?
-TARGET_HEIGHT = None                                         # TARGET_HEIGHT need to be defined
-TARGET_WIDTH = 500                                           # TARGET_WIDTH need to be defined
+global TARGET_HEIGHT, TARGET_WIDTH
+TARGET_HEIGHT = int(os.environ["modal.state.targetHeight"]) # TARGET_HEIGHT need to be defined
+TARGET_WIDTH  = int(os.environ["modal.state.targetWidth"])  # TARGET_WIDTH need to be defined
 # check for target params
 assert TARGET_HEIGHT is not None or TARGET_WIDTH is not None, "Target shape is not defined!..."
 target_height = TARGET_HEIGHT if TARGET_HEIGHT is not None else -1
 target_width  = TARGET_WIDTH  if TARGET_WIDTH  is not None else -1
 # ----------------------------------------------------------------------------------------------------------------------
-
 # -------------- init global variables ---------------------------------------------------------------------------------
 # SRC - source
 # DST - destination
@@ -31,9 +30,9 @@ src_project = app.public_api.project.get_info_by_id(project_id)
 if src_project is None:
     raise RuntimeError(f"Project id={project_id} not found")
 
-if NEW_PROJECT_NAME == '' or NEW_PROJECT_NAME is None:
-    NEW_PROJECT_NAME = src_project.name + '_resized'
-dst_project = api.project.create(workspace_id, NEW_PROJECT_NAME, change_name_if_conflict=True)
+if new_project_name == 'default' or new_project_name is None:
+    new_project_name = src_project.name + '_resized'
+dst_project = api.project.create(workspace_id, new_project_name, change_name_if_conflict=True)
 app.logger.info("Result Project is created (name={!r}; id={})".format(dst_project.name, dst_project.id))
 # ----------------------------------------------------------------------------------------------------------------------
 
