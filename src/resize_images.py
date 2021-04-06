@@ -49,7 +49,7 @@ for dataset in api.dataset.get_list(src_project.id):
     destination_dataset = api.dataset.create(dst_project.id, dataset.name)
     ds_images = api.image.get_list(dataset.id)
     # batch_level (data will be downloaded/uploaded as batches(N images and annotation_data) to improve time management)
-    for batch in sly.batched(ds_images):
+    for batch in sly.batched(ds_images, batch_size = 10):
         image_ids   = [image_info.id   for image_info in batch]     # image indexes in batch
         image_names = [image_info.name for image_info in batch]     # image names in batch
         image_metas = [image_info.meta for image_info in batch]     # image metas in batch
