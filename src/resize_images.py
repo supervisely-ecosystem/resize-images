@@ -35,14 +35,12 @@ if new_project_name == 'default' or new_project_name is None:
 dst_project = api.project.create(workspace_id, new_project_name, change_name_if_conflict=True)
 app.logger.info("Result Project is created (name={!r}; id={})".format(dst_project.name, dst_project.id))
 # ----------------------------------------------------------------------------------------------------------------------
-
 # -------------- get meta-info from src_project and copy to dst_project ------------------------------------------------
 meta = sly.ProjectMeta.from_json(app.public_api.project.get_meta(project_id))
 if len(meta.obj_classes) == 0:
     raise ValueError("Project should have at least one class")
 api.project.update_meta(dst_project.id, meta.to_json())
 # ----------------------------------------------------------------------------------------------------------------------
-
 # -------------- process each dataset for each project and dump results to new project ---------------------------------
 # logger initialisation
 progress = sly.Progress("Processing", src_project.images_count, ext_logger=app.logger)
