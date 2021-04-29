@@ -17,5 +17,5 @@
   "headless": true,
   "icon": "https://i.imgur.com/ZSM70pg.png",
   "icon_background": "#FFFFFF",
-  "context_menu": {}
+  "context_menu": {"target": []}
 }
