@@ -15,8 +15,8 @@ new_project_name = os.environ["modal.state.projectName"]    # from debug.env
 # ----------------------------------------------------------------------------------------------------------------------
 # -------------- init global variables ---------------------------------------------------------------------------------
 global TARGET_HEIGHT, TARGET_WIDTH
-TARGET_HEIGHT = int(os.environ["modal.state.targetHeight"]) # TARGET_HEIGHT need to be defined
-TARGET_WIDTH = int(os.environ["modal.state.targetWidth"])  # TARGET_WIDTH need to be defined
+TARGET_HEIGHT = int(os.environ["modal.state.size.height"]) # TARGET_HEIGHT need to be defined
+TARGET_WIDTH = int(os.environ["modal.state.size.width"])  # TARGET_WIDTH need to be defined
 # check for target params
 assert TARGET_HEIGHT is not None or TARGET_WIDTH is not None, "Target shape is not defined!..."
 target_height = TARGET_HEIGHT if TARGET_HEIGHT is not None else -1
