@@ -28,6 +28,8 @@ This apps allows to resize both images and their annotations. The result  will b
 
 Go to Ecosystem Menu, find app "Resize-images"(Categories: Transform) and double-click it, press button "Add".
 
+<img src="https://i.imgur.com/yPY9HGj.png"/>
+
 ## Step 1: Run from context menu of project
 
 Go to "Context Menu" (images project) -> "Run App" -> "Transform" -> "Resize-images"
