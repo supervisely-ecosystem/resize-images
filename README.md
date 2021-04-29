@@ -26,12 +26,12 @@ This apps allows to resize both images and their annotations. The result  will b
 
 **Step 1.** Add app to your team from Ecosystem
 
-   Select `Ecosystem` in Main Menu -> `Transform` in Content -> Resize images
+   Select `Ecosystem` in Main Menu -> `Transform` in Content -> `Resize images`
 <img src="https://i.imgur.com/QVkl9yp.png" width="800px"/>
 
 **Step 2.** Run from context menu of project
 
-   Go to "Context Menu" (images project) -> "Run App" -> "Transform" -> "Resize images" 
+   Go to `Context Menu` (images project) -> `Run App` -> "Transform" -> `Resize images` 
 <img src="https://i.imgur.com/w5pztbj.png" height="400px"/>
 
 **Step 3.** Set target width and height
