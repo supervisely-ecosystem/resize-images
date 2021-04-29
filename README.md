@@ -29,7 +29,6 @@ This apps allows to resize both images and their annotations. The result  will b
 
 Go to "Context Menu" (images project) -> "Run App" -> "Transform" -> "Resize images"
 
-<img src="https://i.imgur.com/f4JlPcv.png"/>
 
 4. Connect to cloud bucket, preview and select files and directories, import selected files to some project/dataset. 
    You can perform these actions as many times as needed
@@ -40,7 +39,7 @@ Go to "Context Menu" (images project) -> "Run App" -> "Transform" -> "Resize ima
 
 Go to Ecosystem Menu, find app "Resize-images"(Categories: Transform) and double-click it, press button "Add".
 
-<img src="https://i.imgur.com/w5pztbj.png"/>
+<img src="https://i.imgur.com/w5pztbj.png" height="400px"/>
 
 ## Step 2: Define transformations
 
