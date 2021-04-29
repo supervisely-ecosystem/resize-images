@@ -5,6 +5,7 @@ from supervisely_lib.aug.aug import resize
 # ------------- init app and api ---------------------------------------------------------------------------------------
 api: sly.Api = sly.Api.from_env()
 app: sly.AppService = sly.AppService()
+
 # ----------------------------------------------------------------------------------------------------------------------
 # -------------- get additional data -----------------------------------------------------------------------------------
 TEAM_ID      = int(os.environ['context.teamId'])            # from debug.env
