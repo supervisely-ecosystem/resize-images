@@ -12,7 +12,7 @@
     "size": {
       "width": 256,
       "height": 256,
-      "proportional": true
+      "proportional": false
     },
     "projectName": "resized"
   },
