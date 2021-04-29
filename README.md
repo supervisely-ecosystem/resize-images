@@ -42,15 +42,11 @@ Go to Ecosystem Menu, find app "Resize-images"(Categories: Transform) and double
 
 <img src="https://i.imgur.com/QVkl9yp.png"/>
 
-
-
-<p align="center"><img src="https://i.imgur.com/TRBaxDD.png"/></p>
-
 ## Step 2: Define transformations
 
 App contains 2 sections: fields for processing target values(width and height), information about output team, workplace and project name.
 
-<p align="center"><img src="https://i.imgur.com/yg48K7K.png" height="400px"/></p>
+<img src="https://i.imgur.com/yg48K7K.png" height="400px"/>
 
 ## Step 3: Press RUN button and wait
 
