@@ -63,14 +63,12 @@ def resize_images(api: sly.Api, task_id, context, state, app_logger):
 
             destination_ids         = []
             destination_image_names = []
-            destination_metas       = []
             resized_images_nps      = []
             resized_annotations     = []
             for image_id, image_name, image_np, image_meta, annotation in zip(image_ids, image_names,
                                                                               image_nps, image_metas, anns):
                 destination_ids.append(image_id)
                 destination_image_names.append(image_name)
-                destination_metas.append(image_meta)
                 # data transformation stage
                 resized_image_np, resized_annotation = resize(image_np, annotation, size=(target_height, target_width))
                 resized_images_nps.append(resized_image_np)
