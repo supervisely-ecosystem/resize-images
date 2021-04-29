@@ -13,7 +13,8 @@
       "width": 256,
       "height": 256,
       "proportional": true
-    }
+    },
+    "projectName": "resized"
   },
   "task_location": "workspace_tasks",
   "isolate": true,
