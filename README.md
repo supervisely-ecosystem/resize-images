@@ -40,7 +40,7 @@ Go to "Context Menu" (images project) -> "Run App" -> "Transform" -> "Resize ima
 
 Go to Ecosystem Menu, find app "Resize-images"(Categories: Transform) and double-click it, press button "Add".
 
-<img src="https://i.imgur.com/QVkl9yp.png"/>
+<img src="https://i.imgur.com/w5pztbj.png"/>
 
 ## Step 2: Define transformations
 
