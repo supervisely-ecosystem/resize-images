@@ -38,7 +38,7 @@ App contains 2 sections: fields for processing target values(width and height), 
 
 ## Step 3: Press RUN button and wait
 
-Press `Run` button. The progress bas will appear in `Output` section. Also you can monitor progress from tasks list of the current workspace.
+Press `Run` button. The progress bar will appear in `Output` section. Also you can monitor progress from tasks list of the current workspace.
 App creates new project and it will appear in `Output` section. Result project name = original name + "(resized)" suffix.
 
 ## Step 4: App shuts down automatically
