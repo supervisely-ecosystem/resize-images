@@ -34,4 +34,3 @@ App contains 2 sections: fields for custom target values(width and height) and i
 <img src="https://i.imgur.com/yg48K7K.png" height="400px"/>
 4. Press `Run` button. The progress bar will appear in `Output` section. Also you can monitor progress from tasks list of the current workspace.
 App creates new project and it will appear in `Output` section. Once you are ready with the app, you should close app manually
-<img src="">
