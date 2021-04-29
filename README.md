@@ -24,7 +24,7 @@ This apps allows to resize both images and their annotations. The result  will b
 
 # How To Use
 
-1. Add app to your team from Ecosystem
+**Step 1**. Add app to your team from Ecosystem
 <img src="https://i.imgur.com/QVkl9yp.png" width="800px"/>
 2. Run from context menu of project
 
