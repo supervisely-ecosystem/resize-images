@@ -20,7 +20,7 @@
 
 # Overview
 
-This apps allows to resize both images and their annotations. The result  will be saved in a new project. 
+This application allows to resize both images and their annotations. The result  will be saved in a new project. 
 
 # How To Use
 
