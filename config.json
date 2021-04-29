@@ -1,15 +1,18 @@
 {
-  "name": "App Template (No GUI)",
+  "name": "Resize-Images",
   "type": "app",
   "categories": [
-    "development"
+    "transform"
   ],
-  "description": "headless app for image&annotation resize",
-  "docker_image": "supervisely/base-py-sdk:6",
+  "description": "app for image and annotation resize",
+  "docker_image": "supervisely/base-py-sdk:6.1.59",
   "main_script": "src/resize_images.py",
+  "modal_template": "src/modal.html",
+  "modal_template_state": {},
   "task_location": "workspace_tasks",
   "isolate": true,
-  "icon": "https://img.icons8.com/color/96/000000/console.png",
+  "headless": true,
+  "icon": "https://img.icons8.com/color/100/000000/resize.png",
   "icon_background": "#FFFFFF",
-  "headless": true
+  "context_menu": {}
 }
