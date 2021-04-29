@@ -9,8 +9,11 @@
   "main_script": "src/resize_images.py",
   "modal_template": "src/modal.html",
   "modal_template_state": {
-    "targetHeight": 256,
-    "targetWidth": 256
+    "size": {
+      "width": 256,
+      "height": 256,
+      "proportional": true
+    }
   },
   "task_location": "workspace_tasks",
   "isolate": true,
