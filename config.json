@@ -8,11 +8,14 @@
   "docker_image": "supervisely/base-py-sdk:6.1.59",
   "main_script": "src/resize_images.py",
   "modal_template": "src/modal.html",
-  "modal_template_state": {},
+  "modal_template_state": {
+    "targetHeight": 300,
+    "targetWidth": 300
+  },
   "task_location": "workspace_tasks",
   "isolate": true,
   "headless": true,
-  "icon": "https://img.icons8.com/color/100/000000/resize.png",
+  "icon": "https://i.imgur.com/ZSM70pg.png",
   "icon_background": "#FFFFFF",
   "context_menu": {}
 }
