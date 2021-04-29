@@ -32,7 +32,7 @@ Go to Ecosystem Menu, find app "Resize-images"(Categories: Transform) and double
 
 ## Step 1: Run from context menu of project
 
-Go to "Context Menu" (images project) -> "Run App" -> "Transform" -> "Resize-images"
+Go to "Context Menu" (images project) -> "Run App" -> "Transform" -> "Resize images"
 
 <img src="https://i.imgur.com/TRBaxDD.png"/>
 
