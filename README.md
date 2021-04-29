@@ -43,7 +43,7 @@ Go to "Context Menu" (images project) -> "Run App" -> "Transform" -> "Resize ima
 App contains 2 sections: fields for processing target values(width and height), information about output team, workplace and project name.
 
 <p align="center">
-<img src="https://i.imgur.com/yg48K7K.png" height="400px/>
+<img src="https://i.imgur.com/yg48K7K.png" height="400px"/>
 </p>
 
 ## Step 3: Press RUN button and wait
