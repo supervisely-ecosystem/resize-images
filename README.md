@@ -24,12 +24,23 @@ This apps allows to resize both images and their annotations. The result  will b
 
 # How To Use
 
-1. Add app to your team from Ecosystem
-2. Run app from `Team Apps` Page
-3. Connect to cloud bucket, preview and select files and directories, import selected files to some project/dataset. 
-   You can perform these actions as many times as needed
-3. Once you are ready with the app, you should close app manually
+## Step 0: Add app to your team from Ecosystem
 
-# Screenshot
+Go to Ecosystem Menu, find app "Resize-images"(Categories: Transform) and double-click it, press button "Add".
 
-<img src="https://i.imgur.com/wgsVrYL.png"/>
+## Step 1: Run from context menu of project
+
+Go to "Context Menu" (images project) -> "Run App" -> "Transform" -> "Resize-images"
+
+## Step 2: Define transformations
+
+App contains 2 sections: fields for processing target values(width and height), information about output team, workplace and project name.
+
+## Step 3: Press RUN button and wait
+
+Press `Run` button. The progress bas will appear in `Output` section. Also you can monitor progress from tasks list of the current workspace.
+App creates new project and it will appear in `Output` section. Result project name = original name + "(resized)" suffix.
+
+## Step 4: App shuts down automatically
+
+Even if app is finished, you can always use it as a history.
