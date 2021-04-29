@@ -36,7 +36,7 @@ def resize_images(api: sly.Api, task_id, context, state, app_logger):
     src_project = app.public_api.project.get_info_by_id(PROJECT_ID)
     if src_project is None:
         raise RuntimeError(f"Project id={PROJECT_ID} not found")
-    if new_project_name == 'default' or new_project_name is None:
+    if new_project_name == 'resized' or new_project_name is None:
         new_project_name = src_project.name + '_resized'
     dst_project = api.project.create(WORKSPACE_ID, new_project_name, change_name_if_conflict=True)
     app.logger.info("Result Project is created (name={!r}; id={})".format(dst_project.name, dst_project.id))
