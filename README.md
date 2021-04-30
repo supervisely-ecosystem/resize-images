@@ -39,4 +39,4 @@ This application allows to resize both images and their annotations. The result 
 <img src="https://i.imgur.com/7znCxrC.png" height="400px"/>
 
 **Step 4.** Press `Run` button. The progress bar will appear in `Output` section. Also you can monitor progress from tasks list of the current workspace.
-   App creates new project and it will appear in `Output` section. Once you are ready with the app, you should close app manually
+   App creates new project and it will appear in `Output` section.
