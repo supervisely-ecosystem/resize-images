@@ -41,8 +41,8 @@ def resize_images(api: sly.Api, task_id, context, state, app_logger):
     app.logger.info("Result Project is created (name={!r}; id={})".format(dst_project.name, dst_project.id))
 
     meta = sly.ProjectMeta.from_json(app.public_api.project.get_meta(PROJECT_ID))
-    if len(meta.obj_classes) == 0:
-        raise ValueError("Project should have at least one class")
+    # if len(meta.obj_classes) == 0:
+    #     raise ValueError("Project should have at least one class")
     api.project.update_meta(dst_project.id, meta.to_json())
 
     progress = sly.Progress("Processing", src_project.images_count, ext_logger=app.logger)
