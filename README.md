@@ -1,6 +1,7 @@
 <div align="center" markdown>
 
-<img src="https://i.imgur.com/R0d7RSW.png](https://user-images.githubusercontent.com/106374579/183634272-a87f7c64-aeb0-42f3-bc96-aff6e61e6015.png"/>
+
+<img src="https://user-images.githubusercontent.com/106374579/183634421-0cb94591-5ea6-4de2-9fd2-fccb72b241d5.png"/>
 
 # Resize-images
 
