@@ -8,6 +8,7 @@ from supervisely.app.widgets import (
     Card,
     ClassicTable,
     Container,
+    Empty,
     Field,
     Input,
     Progress,
@@ -40,9 +41,9 @@ input_newsize = BindedInputNumber(
 )
 field_newsize = Field(input_newsize, "Specify new size")
 
-
 input_newproject = Input(placeholder="Input new project name")
 
+container_newproject = Container([input_newproject, Empty()], fractions=[1, 3])
 
 button_resize = Button("Resize")
 progress_bar = Progress(show_percents=False)
