@@ -146,6 +146,6 @@ def resize_images():
                 # progress.iters_done_report(len(resized_images_ids))
                 pbar.update(len(resized_images_ids))
 
-    print("###########INFO##########", g.api.project.get_info_by_id(dst_project.id))
-    # project_thumbnail.set()
+    project_info = g.api.project.get_info_by_id(dst_project.id)
+    project_thumbnail.set(project_info)
     project_thumbnail.show()
