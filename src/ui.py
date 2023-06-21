@@ -32,6 +32,7 @@ most_frequent_sizes = [(count, size) for size, count in sorted_sizes[:10]]
 
 classic_table = ClassicTable()
 classic_table.read_pandas(pd.DataFrame(data=most_frequent_sizes, columns=["Count", "Size"]))
+
 field_table = Field(classic_table, "Most frequent image sizes [ width x height ]")
 
 input_newsize = BindedInputNumber(
@@ -50,7 +51,7 @@ notification = Text()
 
 
 card_1 = Card(
-    title=f"Resize images in '{project_info.name}' project",
+    title=f"Resize all images in '{project_info.name}' project",
     content=Container(
         widgets=[
             field_table,
@@ -147,4 +148,3 @@ def resize_images():
 
     project_thumbnail.set(dst_project)
     project_thumbnail.show()
-    g.api.task.set_output_project(g.TASK_ID, dst_project.id, dst_project.name)
