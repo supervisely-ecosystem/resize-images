@@ -57,7 +57,7 @@ card_1 = Card(
         widgets=[
             field_table,
             field_newsize,
-            input_newproject,
+            container_newproject,
             button_resize,
             progress_bar,
             notification,
