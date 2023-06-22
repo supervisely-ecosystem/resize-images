@@ -17,8 +17,8 @@
   "icon_cover": true,
   "poster": "https://user-images.githubusercontent.com/106374579/183634421-0cb94591-5ea6-4de2-9fd2-fccb72b241d5.png",
   "context_menu": {
-    "target": ["images_project"],
-    "context_category": "Transform"
+    "context_category": "Transform",
+    "target": ["images_project"]
   },
   "entrypoint": "python -m uvicorn src.main:app --host 0.0.0.0 --port 8000",
   "port": 8000

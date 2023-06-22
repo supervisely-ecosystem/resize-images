@@ -21,23 +21,23 @@
 
 # Overview
 
-This application allows to resize both images and their annotations. The result  will be saved in a new project. 
+This application allows you to resize both images and their annotations. The result will be saved in a new project.
 
 # How To Use
 
-**Step 1.** Add app to your team from Ecosystem
+**Step 1.** Add an app to your team from Ecosystem
 
    Select `Ecosystem` in Main Menu -> `Transform` in Content -> `Resize images`
 <img src="https://i.imgur.com/O0uy6v1.png"/>
 
-**Step 2**: Open context menu of project -> `Run App` -> `Transform` -> `Resize images` 
+**Step 2**: Open context menu of the project -> `Run` App` -> `Transform` -> `Resize images` 
 <img src="https://i.imgur.com/w5pztbj.png" height="400px"/>
 
 **Step 3.** Set target width and height
    
-   App contains 2 sections: fields for custom target values(width and height) and information about output team, workplace, project name. 
+   The app contains three sections: a table displaying the top 10 most frequent image sizes, a field for custom target values (width and height) with checkboxes that enable the equalization of sides by automatically adjusting the selected one, and a field with information about the output team, workplace, and project name.
    
-<img src="https://i.imgur.com/7znCxrC.png" height="400px"/>
+![image](https://github.com/supervisely-ecosystem/resize-images/assets/78355358/a9e7fecf-5506-488a-9eea-86d817f10c00)
 
-**Step 4.** Press `Run` button. The progress bar will appear in `Output` section. Also you can monitor progress from tasks list of the current workspace.
-   App creates new project and it will appear in `Output` section.
+**Step 4.** Press the `Run` button. The progress bar will appear in the `Output` section. Also, you can monitor progress from the tasks list of the current workspace.
+   The app creates a new project and it will appear in the `Output` section.

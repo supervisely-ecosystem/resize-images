@@ -34,7 +34,9 @@ for dataset in g.api.dataset.get_list(g.PROJECT_ID):
 
 size_counts = Counter(sizes_dict.values())
 sorted_sizes = sorted(size_counts.items(), key=lambda x: x[1], reverse=True)
-most_frequent_sizes = [(count, round(100*count/len(sizes_dict), 1), size) for size, count in sorted_sizes[:10]]
+most_frequent_sizes = [
+    (count, round(100 * count / len(sizes_dict), 1), size) for size, count in sorted_sizes[:10]
+]
 
 
 classic_table = ClassicTable()
@@ -42,7 +44,6 @@ classic_table.read_pandas(
     pd.DataFrame(data=most_frequent_sizes, columns=["Count", "% of Images", "Size"])
 )
 
-field_table = Field(classic_table, "Most frequent image sizes [ width x height ]")
 
 input_width = InputNumber(most_frequent_sizes[0][2][0])
 input_height = InputNumber(most_frequent_sizes[0][2][1])
@@ -94,9 +95,7 @@ width_row = Flexbox(
 height_row = Flexbox(
     widgets=[
         Container(widgets=[Empty(), Text("<b>Height:</b>")], gap=7),
-        Flexbox(
-            widgets=[OneOf(height_switch), height_switch, height_checkbox_and_text]
-        ),
+        Flexbox(widgets=[OneOf(height_switch), height_switch, height_checkbox_and_text]),
     ],
     gap=10,
 )
@@ -146,41 +145,44 @@ def auto_width_checkbox_changed(value):
 
 
 input_newsize = Container([Empty(), width_row, height_row])
-field_newsize = Field(input_newsize, "Specify new size")
 
 input_newproject = Input(placeholder="Resized project name")
 
-container_newproject = Container(
-    [input_newproject, Empty()], "horizontal", fractions=[1, 4]
-)
+container_newproject = Container([input_newproject, Empty()], "horizontal", fractions=[22, 36])
 
-button_resize = Button("Resize")
+button_run = Button("Run")
 progress_bar = Progress(show_percents=False)
 project_thumbnail = ProjectThumbnail()
-dest_project = Field(project_thumbnail, "Destination project")
+thumbnail_project = Field(project_thumbnail, "Destination project")
 notification = Text()
 
+hideables = Container(
+    widgets=[
+        progress_bar,
+        notification,
+        thumbnail_project,
+    ],
+    gap=0,
+)
 
 card_1 = Card(
-    title=f"Resize all images in '{src_project_info.name}' project",
+    title=f"Resize images in '{src_project_info.name}' project",
     content=Container(
         widgets=[
             Field(src_project_thumbnail, "Source project"),
-            field_table,
-            field_newsize,
+            Field(classic_table, "Most frequent image sizes [ width x height ]"),
+            Field(input_newsize, "Specify new size"),
             Field(container_newproject, "Input new project name"),
-            button_resize,
-            progress_bar,
-            notification,
-            dest_project,
+            button_run,
+            hideables,
         ],
-        gap=20,
+        # gap=20,
     ),
 )
 
 
 notification.hide()
-dest_project.hide()
+thumbnail_project.hide()
 progress_bar.hide()
 
 
@@ -213,36 +215,24 @@ def get_target_size(
     height = source_size[1]
     if auto_width:
         height = (
-            target_height_value
-            if is_height_px
-            else (target_height_value * source_size[1]) / 100
+            target_height_value if is_height_px else (target_height_value * source_size[1]) / 100
         )
         width = (height * source_size[0]) / source_size[1]
     elif auto_height:
-        width = (
-            target_width_value
-            if is_width_px
-            else (target_width_value * source_size[0]) / 100
-        )
+        width = target_width_value if is_width_px else (target_width_value * source_size[0]) / 100
         height = (width * source_size[1]) / source_size[0]
     else:
-        width = (
-            target_width_value
-            if is_width_px
-            else (target_width_value * source_size[0]) / 100
-        )
+        width = target_width_value if is_width_px else (target_width_value * source_size[0]) / 100
         height = (
-            target_height_value
-            if is_height_px
-            else (target_height_value * source_size[1]) / 100
+            target_height_value if is_height_px else (target_height_value * source_size[1]) / 100
         )
     return (int(width), int(height))
 
 
-@button_resize.click
+@button_run.click
 def resize_images():
     notification.hide()
-    dest_project.hide()
+    thumbnail_project.hide()
     progress_bar.hide()
 
     new_project_name = input_newproject.get_value()
@@ -278,18 +268,10 @@ def resize_images():
             # batch_level (data will be downloaded/uploaded as batches(N images and annotation_data)
             # to improve time management)
             for batch in sly.batched(ds_images, batch_size=10):
-                image_ids = [
-                    image_info.id for image_info in batch
-                ]  # image indexes in batch
-                image_names = [
-                    image_info.name for image_info in batch
-                ]  # image names in batch
-                image_metas = [
-                    image_info.meta for image_info in batch
-                ]  # image metas in batch
-                image_nps = g.api.image.download_nps(
-                    dataset.id, image_ids
-                )  # images <np.ndarrray>s
+                image_ids = [image_info.id for image_info in batch]  # image indexes in batch
+                image_names = [image_info.name for image_info in batch]  # image names in batch
+                image_metas = [image_info.meta for image_info in batch]  # image metas in batch
+                image_nps = g.api.image.download_nps(dataset.id, image_ids)  # images <np.ndarrray>s
                 target_sizes = [
                     get_target_size(
                         source_size=(image_info.width, image_info.height),
@@ -305,8 +287,7 @@ def resize_images():
 
                 ann_infos = g.api.annotation.download_batch(dataset.id, image_ids)
                 anns = [
-                    sly.Annotation.from_json(ann_info.annotation, meta)
-                    for ann_info in ann_infos
+                    sly.Annotation.from_json(ann_info.annotation, meta) for ann_info in ann_infos
                 ]
 
                 destination_ids = []
@@ -320,9 +301,7 @@ def resize_images():
                     image_meta,
                     annotation,
                     target_size,
-                ) in zip(
-                    image_ids, image_names, image_nps, image_metas, anns, target_sizes
-                ):
+                ) in zip(image_ids, image_names, image_nps, image_metas, anns, target_sizes):
                     destination_ids.append(image_id)
                     destination_image_names.append(image_name)
                     # data transformation stage
@@ -338,13 +317,11 @@ def resize_images():
                     imgs=resized_images_nps,
                 )
 
-                resized_images_ids = [
-                    image_info.id for image_info in resized_images_info
-                ]
+                resized_images_ids = [image_info.id for image_info in resized_images_info]
                 g.api.annotation.upload_anns(resized_images_ids, resized_annotations)
                 # progress.iters_done_report(len(resized_images_ids))
                 pbar.update(len(resized_images_ids))
 
     project_info = g.api.project.get_info_by_id(dst_project.id)
     project_thumbnail.set(project_info)
-    dest_project.show()
+    thumbnail_project.show()
