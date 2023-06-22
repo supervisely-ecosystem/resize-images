@@ -1,2 +1,2 @@
-supervisely
-scikit-image
+supervisely==6.72.44
+scikit-image==0.21.0

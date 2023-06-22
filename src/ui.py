@@ -41,7 +41,7 @@ most_frequent_sizes = [
 
 classic_table = ClassicTable()
 classic_table.read_pandas(
-    pd.DataFrame(data=most_frequent_sizes, columns=["Count", "% of Images", "Size"])
+    pd.DataFrame(data=most_frequent_sizes, columns=["Count", "Count (%)", "Size"])
 )
 
 
