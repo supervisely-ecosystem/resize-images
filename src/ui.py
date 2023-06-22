@@ -34,18 +34,18 @@ for dataset in g.api.dataset.get_list(g.PROJECT_ID):
 
 size_counts = Counter(sizes_dict.values())
 sorted_sizes = sorted(size_counts.items(), key=lambda x: x[1], reverse=True)
-most_frequent_sizes = [(count, size) for size, count in sorted_sizes[:10]]
+most_frequent_sizes = [(count, round(100*count/len(sizes_dict), 1), size) for size, count in sorted_sizes[:10]]
 
 
 classic_table = ClassicTable()
 classic_table.read_pandas(
-    pd.DataFrame(data=most_frequent_sizes, columns=["Count", "Size"])
+    pd.DataFrame(data=most_frequent_sizes, columns=["Count", "% of Images", "Size"])
 )
 
 field_table = Field(classic_table, "Most frequent image sizes [ width x height ]")
 
-input_width = InputNumber(most_frequent_sizes[0][1][0])
-input_height = InputNumber(most_frequent_sizes[0][1][1])
+input_width = InputNumber(most_frequent_sizes[0][2][0])
+input_height = InputNumber(most_frequent_sizes[0][2][1])
 input_width_percent = InputNumber(min=1, value=100)
 input_height_percent = InputNumber(min=1, value=100)
 auto_width_checkbox = Checkbox("")
