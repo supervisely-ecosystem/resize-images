@@ -35,9 +35,9 @@ This application allows you to resize both images and their annotations. The res
 
 **Step 3.** Set target width and height
    
-   The app contains three sections: a table displaying the top 10 most frequent image sizes, a field for custom target values (width and height) with checkboxes that enable the equalization of sides by automatically adjusting the selected one, and a field with information about the output team, workplace, and project name.
+   The app contains three sections: a table displaying the top 10 most frequent image sizes, a field for custom target values (width and height) with checkboxes that enable equalising sides by automatically adjusting the selected one, and an input field with the resized project name.
    
 ![image](https://github.com/supervisely-ecosystem/resize-images/assets/78355358/d61a0a74-d807-4ee0-9208-911eefdc9832)
 
 **Step 4.** Press the `Run` button. The progress bar will appear in the `Output` section. Also, you can monitor progress from the tasks list of the current workspace.
-   The app creates a new project and it will appear in the `Output` section.
+   The app creates a new project and will appear as a thumbnail under the `Run` button.
