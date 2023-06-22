@@ -39,5 +39,5 @@ This application allows you to resize both images and their annotations. The res
    
 ![image](https://github.com/supervisely-ecosystem/resize-images/assets/78355358/d61a0a74-d807-4ee0-9208-911eefdc9832)
 
-**Step 4.** Press the `Run` button. The progress bar will appear in the `Output` section. Also, you can monitor progress from the tasks list of the current workspace.
+**Step 4.** Press the `Run` button. The progress bar will appear. Also, you can monitor progress from the tasks list of the current workspace.
    The app creates a new project and will appear as a thumbnail under the `Run` button.
