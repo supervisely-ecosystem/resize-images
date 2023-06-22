@@ -26,6 +26,11 @@ import src.globals as g
 
 src_project_info = g.api.project.get_info_by_id(g.PROJECT_ID)
 src_project_thumbnail = ProjectThumbnail(src_project_info)
+src_project_card = Card(
+    title="1️⃣ Source Project",
+    description="All images from this project will be resized",
+    content=src_project_thumbnail,
+)
 
 sizes_dict = {}
 for dataset in g.api.dataset.get_list(g.PROJECT_ID):
@@ -35,15 +40,21 @@ for dataset in g.api.dataset.get_list(g.PROJECT_ID):
 size_counts = Counter(sizes_dict.values())
 sorted_sizes = sorted(size_counts.items(), key=lambda x: x[1], reverse=True)
 most_frequent_sizes = [
-    (count, round(100 * count / len(sizes_dict), 1), size) for size, count in sorted_sizes[:10]
+    (count, round(100 * count / len(sizes_dict), 1), size)
+    for size, count in sorted_sizes[:10]
 ]
 
 
-classic_table = ClassicTable()
-classic_table.read_pandas(
+sizes_frequencies_table = ClassicTable()
+sizes_frequencies_table.read_pandas(
     pd.DataFrame(data=most_frequent_sizes, columns=["Count", "Count (%)", "Size"])
 )
 
+sizes_frequencies_table_card = Card(
+    title="2️⃣ Most frequent image sizes [ width x height ]",
+    description="Discover images sizes statistics",
+    content=sizes_frequencies_table,
+)
 
 input_width = InputNumber(most_frequent_sizes[0][2][0])
 input_height = InputNumber(most_frequent_sizes[0][2][1])
@@ -54,7 +65,7 @@ width_checkbox_and_text = Flexbox(
     widgets=[
         auto_width_checkbox,
         Text(
-            '<div style="display:flex; flex-direction: column;"><b>auto width</b><span style="color: #7f858e;">adjust width proportionally</span></div>'
+            '<div style="display:flex; flex-direction: column;"><b>auto width</b><span style="color: #7f858e;">adjust width proportionally (keep aspect ratio)</span></div>'
         ),
     ],
     gap=0,
@@ -64,7 +75,7 @@ height_checkbox_and_text = Flexbox(
     widgets=[
         auto_height_checkbox,
         Text(
-            '<div style="display:flex; flex-direction: column;"><b>auto height</b><span style="color: #7f858e;">adjust height proportionally</span></div>'
+            '<div style="display:flex; flex-direction: column;"><b>auto height</b><span style="color: #7f858e;">adjust height proportionally (keep aspect ratio)</span></div>'
         ),
     ],
     gap=0,
@@ -145,44 +156,51 @@ def auto_width_checkbox_changed(value):
 
 
 input_newsize = Container([Empty(), width_row, height_row])
+newsize_card = Card(
+    title="3️⃣ Specify new size",
+    description="Input new sizes in pixels or percents",
+    content=input_newsize,
+)
 
 input_newproject = Input(placeholder="Resized project name")
 
 container_newproject = Container([input_newproject, Empty()], "horizontal", fractions=[22, 36])
+newproject_card = Card(
+    title="4️⃣ New project name",
+    description="Resized images will be saved to a new project with the following name",
+    content=container_newproject,
+)
 
 button_run = Button("Run")
 progress_bar = Progress(show_percents=False)
-project_thumbnail = ProjectThumbnail()
-thumbnail_project = Field(project_thumbnail, "Destination project")
+dst_project_thumbnail = ProjectThumbnail()
+dst_project_card = Card(title="✅ Destination project", content=dst_project_thumbnail)
 notification = Text()
 
 hideables = Container(
     widgets=[
+        dst_project_card,
         progress_bar,
         notification,
-        thumbnail_project,
     ],
     gap=0,
 )
 
-card_1 = Card(
-    title=f"Resize images in '{src_project_info.name}' project",
-    content=Container(
-        widgets=[
-            Field(src_project_thumbnail, "Source project"),
-            Field(classic_table, "Most frequent image sizes [ width x height ]"),
-            Field(input_newsize, "Specify new size"),
-            Field(container_newproject, "Input new project name"),
-            button_run,
-            hideables,
-        ],
-        # gap=20,
-    ),
+layout = Container(
+    widgets=[
+        src_project_card,
+        sizes_frequencies_table_card,
+        newsize_card,
+        newproject_card,
+        button_run,
+        hideables,
+    ],
+    gap=20,
 )
 
 
 notification.hide()
-thumbnail_project.hide()
+dst_project_card.hide()
 progress_bar.hide()
 
 
@@ -232,7 +250,7 @@ def get_target_size(
 @button_run.click
 def resize_images():
     notification.hide()
-    thumbnail_project.hide()
+    dst_project_card.hide()
     progress_bar.hide()
 
     new_project_name = input_newproject.get_value()
@@ -323,5 +341,5 @@ def resize_images():
                 pbar.update(len(resized_images_ids))
 
     project_info = g.api.project.get_info_by_id(dst_project.id)
-    project_thumbnail.set(project_info)
-    thumbnail_project.show()
+    dst_project_thumbnail.set(project_info)
+    dst_project_card.show()
