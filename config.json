@@ -12,7 +12,7 @@
   "docker_image": "supervisely/base-py-sdk:6.72.55",
   "task_location": "workspace_tasks",
   "isolate": true,
-  "icon": "https://i.imgur.com/ZSM70pg.png",
+  "icon": "media/icon.png",
   "icon_background": "#FFFFFF",
   "icon_cover": true,
   "poster": "https://user-images.githubusercontent.com/106374579/183634421-0cb94591-5ea6-4de2-9fd2-fccb72b241d5.png",
