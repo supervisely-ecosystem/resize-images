@@ -9,7 +9,7 @@
         "data operations"
     ],
     "description": "for both images and their annotations",
-    "docker_image": "supervisely/data-operations:0.0.1",
+    "docker_image": "supervisely/data-operations:0.0.3",
     "task_location": "workspace_tasks",
     "isolate": true,
     "icon": "https://i.imgur.com/ZSM70pg.png",
