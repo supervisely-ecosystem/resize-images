@@ -327,6 +327,7 @@ def resize_images():
                         )
                     except ValueError as exc:
                         sly.logger.warn(f"Error while resizing image {image_name} with id={image_id}, skiping...")
+                        pbar.update(1)
                         continue
                     destination_ids.append(image_id)
                     destination_image_names.append(image_name)
