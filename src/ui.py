@@ -320,8 +320,6 @@ def resize_images():
                     annotation,
                     target_size,
                 ) in zip(image_ids, image_names, image_nps, image_metas, anns, target_sizes):
-                    destination_ids.append(image_id)
-                    destination_image_names.append(image_name)
                     try:
                         # data transformation stage
                         resized_image_np, resized_annotation = resize(
@@ -330,6 +328,8 @@ def resize_images():
                     except ValueError as exc:
                         sly.logger.warn(f"Error while resizing image {image_name} with id={image_id}, skiping...")
                         continue
+                    destination_ids.append(image_id)
+                    destination_image_names.append(image_name)
                     resized_images_nps.append(resized_image_np)
                     resized_annotations.append(resized_annotation)
                 # upload transformed 'np.ndarray's and annotations to dst_project dataset
