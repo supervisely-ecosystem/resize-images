@@ -21,6 +21,7 @@ from supervisely.app.widgets import (
     Text,
 )
 from supervisely.aug.aug import resize
+from supervisely.imaging import image as sly_image
 
 import src.globals as g
 
@@ -220,8 +221,6 @@ def get_height() -> Tuple[int, bool, bool]:
         return input_height_percent.get_value(), False, is_auto
 
 def _resize(img, ann, size, skip_empty_masks: bool = False):
-    from supervisely.imaging import image as sly_image
-
     new_size = sly_image.restore_proportional_size(in_size=ann.img_size, out_size=size)
     res_img = sly_image.resize(img, new_size)
     res_ann = ann.resize(new_size, skip_empty_masks=skip_empty_masks)
