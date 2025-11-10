@@ -219,6 +219,13 @@ def get_height() -> Tuple[int, bool, bool]:
     else:
         return input_height_percent.get_value(), False, is_auto
 
+def _resize(img, ann, size, skip_empty_masks: bool = False):
+    from supervisely.imaging import image as sly_image
+
+    new_size = sly_image.restore_proportional_size(in_size=ann.img_size, out_size=size)
+    res_img = sly_image.resize(img, new_size)
+    res_ann = ann.resize(new_size, skip_empty_masks=skip_empty_masks)
+    return res_img, res_ann
 
 def get_target_size(
     source_size: Tuple[int, int],
@@ -324,7 +331,7 @@ def resize_images():
                     destination_image_names.append(image_name)
                     # data transformation stage
                     try:
-                        resized_image_np, resized_annotation = resize(
+                        resized_image_np, resized_annotation = _resize(
                             image_np, annotation, size=(target_size[1], target_size[0]), skip_empty_masks=True
                         )
                     except Exception as e:
