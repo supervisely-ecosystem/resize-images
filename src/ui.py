@@ -323,9 +323,12 @@ def resize_images():
                     destination_ids.append(image_id)
                     destination_image_names.append(image_name)
                     # data transformation stage
-                    resized_image_np, resized_annotation = resize(
-                        image_np, annotation, size=(target_size[1], target_size[0])
-                    )
+                    try:
+                        resized_image_np, resized_annotation = resize(
+                            image_np, annotation, size=(target_size[1], target_size[0])
+                        )
+                    except Exception as e:
+                        sly.logger.warning(f"Failed to resize image with id:{image_id}: {e}")
                     resized_images_nps.append(resized_image_np)
                     resized_annotations.append(resized_annotation)
                 # upload transformed 'np.ndarray's and annotations to dst_project dataset
