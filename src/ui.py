@@ -20,7 +20,6 @@ from supervisely.app.widgets import (
     Switch,
     Text,
 )
-from supervisely.aug.aug import resize
 from supervisely.imaging import image as sly_image
 
 import src.globals as g
@@ -220,7 +219,7 @@ def get_height() -> Tuple[int, bool, bool]:
     else:
         return input_height_percent.get_value(), False, is_auto
 
-def _resize(img, ann: sly.Annotation, size: Tuple[int, int], skip_empty_masks: bool = False):
+def resize(img, ann: sly.Annotation, size: Tuple[int, int], skip_empty_masks: bool = False):
     new_size = sly_image.restore_proportional_size(in_size=ann.img_size, out_size=size)
     res_img = sly_image.resize(img, new_size)
     res_ann = ann.resize(new_size, skip_empty_masks=skip_empty_masks)
@@ -330,7 +329,7 @@ def resize_images():
                     destination_image_names.append(image_name)
                     # data transformation stage
                     try:
-                        resized_image_np, resized_annotation = _resize(
+                        resized_image_np, resized_annotation = resize(
                             image_np, annotation, size=(target_size[1], target_size[0]), skip_empty_masks=True
                         )
                     except Exception as e:
