@@ -285,11 +285,16 @@ def resize_images():
 
     progress_bar.show()
 
+    dataset_id_mapping = {}
+
     with progress_bar(message="Processing", total=src_project.images_count) as pbar:
         for dataset in g.api.dataset.get_list(src_project.id, recursive=True):
+            destination_parent_id = dataset_id_mapping.get(dataset.parent_id)
             destination_dataset = g.api.dataset.create(
-                dst_project.id, dataset.name, parent_id=dataset.parent_id
+                dst_project.id, dataset.name, parent_id=destination_parent_id
             )
+            dataset_id_mapping[dataset.id] = destination_dataset.id
+
             ds_images = g.api.image.get_list(dataset.id)
             # batch_level (data will be downloaded/uploaded as batches(N images and annotation_data)
             # to improve time management)
