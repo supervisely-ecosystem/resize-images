@@ -37,6 +37,12 @@ for dataset in g.api.dataset.get_list(g.PROJECT_ID, recursive=True):
     for image in g.api.image.get_list(dataset.id):
         sizes_dict[image.id] = (image.width, image.height)
 
+if not sizes_dict:
+    raise ValueError(
+        f"Project '{src_project_info.name}' (ID: {g.PROJECT_ID}) contains no images. "
+        "Please select a project with images to resize."
+    )
+
 size_counts = Counter(sizes_dict.values())
 sorted_sizes = sorted(size_counts.items(), key=lambda x: x[1], reverse=True)
 most_frequent_sizes = [
