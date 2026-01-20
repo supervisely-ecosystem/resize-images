@@ -33,15 +33,14 @@ src_project_card = Card(
 )
 
 sizes_dict = {}
-for dataset in g.api.dataset.get_list(g.PROJECT_ID):
+for dataset in g.api.dataset.get_list(g.PROJECT_ID, recursive=True):
     for image in g.api.image.get_list(dataset.id):
         sizes_dict[image.id] = (image.width, image.height)
 
 size_counts = Counter(sizes_dict.values())
 sorted_sizes = sorted(size_counts.items(), key=lambda x: x[1], reverse=True)
 most_frequent_sizes = [
-    (count, round(100 * count / len(sizes_dict), 1), size)
-    for size, count in sorted_sizes[:10]
+    (count, round(100 * count / len(sizes_dict), 1), size) for size, count in sorted_sizes[:10]
 ]
 
 
@@ -219,11 +218,13 @@ def get_height() -> Tuple[int, bool, bool]:
     else:
         return input_height_percent.get_value(), False, is_auto
 
+
 def resize(img, ann: sly.Annotation, size: Tuple[int, int], skip_empty_masks: bool = False):
     new_size = sly_image.restore_proportional_size(in_size=ann.img_size, out_size=size)
     res_img = sly_image.resize(img, new_size)
     res_ann = ann.resize(new_size, skip_empty_masks=skip_empty_masks)
     return res_img, res_ann
+
 
 def get_target_size(
     source_size: Tuple[int, int],
@@ -285,8 +286,10 @@ def resize_images():
     progress_bar.show()
 
     with progress_bar(message="Processing", total=src_project.images_count) as pbar:
-        for dataset in g.api.dataset.get_list(src_project.id):
-            destination_dataset = g.api.dataset.create(dst_project.id, dataset.name)
+        for dataset in g.api.dataset.get_list(src_project.id, recursive=True):
+            destination_dataset = g.api.dataset.create(
+                dst_project.id, dataset.name, parent_id=dataset.parent_id
+            )
             ds_images = g.api.image.get_list(dataset.id)
             # batch_level (data will be downloaded/uploaded as batches(N images and annotation_data)
             # to improve time management)
@@ -330,7 +333,10 @@ def resize_images():
                     # data transformation stage
                     try:
                         resized_image_np, resized_annotation = resize(
-                            image_np, annotation, size=(target_size[1], target_size[0]), skip_empty_masks=True
+                            image_np,
+                            annotation,
+                            size=(target_size[1], target_size[0]),
+                            skip_empty_masks=True,
                         )
                     except Exception as e:
                         sly.logger.warning(f"Failed to resize image with id:{image_id}: {e}")
